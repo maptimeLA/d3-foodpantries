@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Map 1</title>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://d3js.org/topojson.v1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+
+	<style type="text/css">
+		#map {
+			width: 600px;
+		}
+		path {
+			stroke: #000;
+		}
+	</style>
+</head>
+<body>
+
+<div id="map" class="map"></div>
+
+<script type="text/javascript">
+
+
+
+
+        
+var windowWidth = document.documentElement.clientWidth;
+
+var div = d3.select('body').append('div')
+            .attr('class','tooltip')
+            .style('opacity', "0");
+
+if (windowWidth < 600){
+    $(div).remove();
+}
+var mouseX, mouseY;
+// var width  = 360;
+// var height = 600;
+var width = parseInt(d3.select('.map').style('width')),
+  width = (width),
+   mapRatio = 1.65,
+   height = width * mapRatio;
+
+var color_domain = [0, 5, 10, 15, 20, 25, 30];
+var bulky_domain = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
+var graffiti_domain = [0, 1, 2, 3];
+var color = d3.scale.threshold().domain(color_domain)
+.range(['#e0ecf4',"#ffffd9","#f7fcb9","#addd8e","#41ab5d","#238443","#004529"]);
+
+var bulkyColor = d3.scale.threshold().domain(bulky_domain)
+.range(['#fee8c8','#fee8c8',"#fdd49e","#fdbb84","#fc8d59","#ef6548","#d7301f","#8B0000"]);
+
+var graffitiColor = d3.scale.threshold().domain(graffiti_domain)
+  .range(['#ccc','#a6bddb','#3690c0',"#02818a","#014636"]);
+  // var vis = d3.select("#vis").append("svg")
+  //     .attr("width", width).attr("height", height)
+var svg = d3.select('#map').append("svg")
+    .attr("width", width)
+          .attr("height", height)
+          .attr("class","potholesvg");
+             g = svg.append("g");
+             p = svg.append("path");
+
+var projection = d3.geo.mercator()
+            .scale(width*105)
+            .center([-118.4, 34.02])
+            .translate([width/2, height/2]);
+var path = d3.geo.path().projection(projection);
+
+path = d3.geo.path().projection(projection);
+
+
+// get the geojson file
+d3.json("la-neighborhoods-pantries.json", function(json) {
+    
+
+	g.selectAll("path").data(json.features).enter().append("path")
+		.attr("d", path)
+		.style("fill", "#ccc")
+		// .style("fill", function (d){
+		// 	return color(d.properties.pothole_ho);
+		// })
+		.style("stroke-width", "1")
+		.style("stroke", "#a2a2a2");
+
+
+    
+
+}); // d3.json();
+
+</script>
+
+</body>
+</html>
