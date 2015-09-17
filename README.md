@@ -62,3 +62,8 @@ Peak in the "step4" folder and you'll see a function that relies on the data to 
 Here's some code to get us a tooltip.
 
 Inside the "step5" folder is a file that uses D3's mouse events to show and hide a tooltip div, while populating it with data from the GeoJSON file.
+
+## Step 6 - Push your own map to github.
+Duplicate the "index.html" file in the "step6" folder. Give it your name or something like ```jschleuss.html``` without spaces.
+
+Then create your own visualization. The GeoJSON file in this folder has more columns of data. Maybe use [ColorBrewer](http://colorbrewer2.org) to find some better colors.
