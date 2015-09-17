@@ -44,6 +44,15 @@ I'd go to about 19% or so and then export as geojson.
 ## Step 3 - Get a basic map in D3
 Now let's get it into D3.
 
+You'll need to be running a server locally using Python.
+
+2. `cd d3-foodpantries`
+3. `python -m SimpleHTTPServer 8000`
+4. Go to your browser and open `http://localhost:8000/`
+5. To open on your phone, find your IP address and open `http://[YOUR-IP-ADDRESS]:8000/`
+
+
+
 ## Step 4 - Add colors based on data in GeoJSON file
 We can use D3 to color the map based on the data in the file.
 
