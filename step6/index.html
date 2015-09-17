@@ -84,7 +84,7 @@
     // get the geojson file
     // you'll need to be running a python server at this point
     // python -m SimpleHTTPServer 8888
-    d3.json("la-neighborhoods-pantries.json", function(json) {
+    d3.json("la-neighborhoods.geojson", function(json) {
 
         // append the shape data to the g
         g.selectAll("path") // select any path elements in the HTML
