@@ -10,7 +10,7 @@ You'll need some knowledge of the following:
 - CSS
 - JavaScript
 
-## Step 1 - Join two GIS files 
+## Step 1 - Join two GIS files
 Let's start by grabbing the the [FoodPantriesMaster file](https://github.com/maptimeLA/food_bank_data_bank/blob/master/datasets/FoodSources/FoodPantries/FoodPantriesMaster.geojson) in the food bank data repo.
 
 ![Food pantries](http://www.jschleuss.com/wp-content/uploads/2015/09/food-pantries1.png)
@@ -39,7 +39,7 @@ Select "Simplify" in the top-right corner. Then make sure "prevent shape removal
 
 ![Slider mapshaper](http://www.jschleuss.com/wp-content/uploads/2015/09/slider.png)
 
-I'd go to about 19% or so and then export as geojson.
+I'd go to about 19% and "repair intersections." Then export as GeoJSON.
 
 ## Step 3 - Get a basic map in D3
 Now let's get it into D3.
@@ -51,10 +51,14 @@ You'll need to be running a server locally using Python.
 4. Go to your browser and open `http://localhost:8000/`
 5. To open on your phone, find your IP address and open `http://[YOUR-IP-ADDRESS]:8000/`
 
-
+If you take a look in the "step3" folder you'll see the code for a basic map. 
 
 ## Step 4 - Add colors based on data in GeoJSON file
 We can use D3 to color the map based on the data in the file.
 
+Peak in the "step4" folder and you'll see a function that relies on the data to get a color. You need to have done some work to figure out where you want your breaks and how many before you make it here. 
+
 ## Step 5 - Add interactivity with tooltip
 Here's some code to get us a tooltip.
+
+Inside the "step5" folder is a file that uses D3's mouse events to show and hide a tooltip div, while populating it with data from the GeoJSON file.
