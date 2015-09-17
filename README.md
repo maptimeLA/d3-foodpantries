@@ -10,7 +10,7 @@ You'll need some knowledge of the following:
 - CSS
 - JavaScript
 
-## Step 1 - Join two GIS files
+## Step 1 - Join two GIS files 
 Let's start by grabbing the the [FoodPantriesMaster file](https://github.com/maptimeLA/food_bank_data_bank/blob/master/datasets/FoodSources/FoodPantries/FoodPantriesMaster.geojson) in the food bank data repo.
 
 ![Food pantries](http://www.jschleuss.com/wp-content/uploads/2015/09/food-pantries1.png)
