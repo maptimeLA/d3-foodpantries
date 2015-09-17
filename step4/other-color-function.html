@@ -11,14 +11,24 @@
 
 <script type="text/javascript">
 
-	// green scale
+	// more scales
 	var green = ['#edf8e9','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'];
+	var red = ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#ef3b2c','#cb181d','#99000d'];
 
 	// color scale
 	// https://github.com/mbostock/d3/wiki/Quantitative-Scales
 	var color_domain = [0, 2, 4, 6, 8, 10, 13];
-	var color = d3.scale.threshold().domain(color_domain)
+	var color = d3.scale.threshold()
+		.domain(color_domain)
 		.range(['#e0ecf4',"#ffffd9","#f7fcb9","#addd8e","#41ab5d","#238443","#004529"]);
+
+	// function colorFunc(d) {
+	// 	return (d < 2) ? green[0] :
+	// 		   (d < 4) ? green[1] :
+	// 		   (d < 6) ? green[2] :
+	// 		   (d < 8) ? green[3] :
+	// 		   (d < 10) ? green[4] : green[5];
+	// }
 
 	// set initial height and width
 	var width = 900,
@@ -53,6 +63,7 @@
 			.attr("d", path)
 		    .style("fill", function (d){ // function to get color
 		        return color(d.properties.pantries);
+		        // return colorFunc(d.properties.pantries); // custom function
 		    })
 			.style("stroke-width", "1px") // Internet Explorer sometimes has problems if no 'px'
 			.style("stroke", "#a2a2a2"); // again! Color!
