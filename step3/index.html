@@ -37,9 +37,9 @@
 	d3.json("la-neighborhoods-pantries.json", function(json) {
 
 		// append the shape data to the g
-		g.selectAll("path")
-			.data(json.features)
-			.enter()
+		g.selectAll("path") // select any path elements in the HTML
+			.data(json.features) // joins data to path
+			.enter() // 
 			.append("path")
 			.attr("d", path)
 			.style("fill", "#eee") // any hex color you want!
