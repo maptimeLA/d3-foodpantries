@@ -1,5 +1,5 @@
 # Turning food bank data into a D3 map
-We'll take a look at the [food bank data](https://github.com/maptimeLA/food_bank_data_bank) and see what can be mapped using D3.
+We'll take a look at the [food bank data](https://github.com/maptimeLA/food_bank_data_bank) and see what can be mapped using [D3](http://d3js.org/).
 
 Our main goal will be to calculate and show the total number of food pantries in a given L.A. neighborhood.
 
@@ -20,7 +20,7 @@ In QGIS, each dot represents a food pantry location. The pantry's location inclu
 ![LA County neighborhoods](http://www.jschleuss.com/wp-content/uploads/2015/09/lacounty-hoods.png)
 We'll need a shapefile with polygons of neighborhoods to do this. Luckily, these shapes are available for free at the Los Angeles Times' [boundaries site](http://boundaries.latimes.com/sets/). 
 
-I've already removed neighborhoods from Orange County and saved both files with NAD83 projection (EPSG:4269). They can be found in step1/start.
+I've already removed neighborhoods from Los Angeles County and saved both files with NAD83 projection (EPSG:4269). They can be found in step1/start.
 
 Open both shape files in QGIS and select Vector > Analysis Tools > Points in Polygon
 
@@ -33,7 +33,7 @@ Hit 'OK' and now you've got a file that has the total number of pantries in each
 ## Step 2 - Simplify the shapefile
 If we were to output this file as a geojson for the Web map we'd get a 1.3 megabyte file. That's a bit large. 
 
-So, take the file into [mapshapper](http://mapshaper.org/) and simplify it. You'll need to use Chrome. Compress your shapefiles (or save it as GeoJSON using QGIS). Then upload it to mapshaper. 
+So, take the file into [mapshaper](http://mapshaper.org/) and simplify it. You'll need to use Chrome. Compress your shapefiles (or save it as GeoJSON using QGIS). Then upload it to mapshaper. 
 
 Select "Simplify" in the top-right corner. Then make sure "prevent shape removal" is checked. And "Visvalingam/weighted area" should be fine for this project. Now, drag the slider at the top. 
 
