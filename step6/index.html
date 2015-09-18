@@ -23,7 +23,7 @@
     .tooltip p {
         font-family: 'Arial',sans-serif;
         font-size: 15px;
-        line-height: 1.4;   
+        line-height: 1.4;
     }
     </style>
 </head>
@@ -32,7 +32,7 @@
 <div id="map" class="map"></div>
 
 <script type="text/javascript">
-
+var init = function() {
     // green scale
     var green = ['#edf8e9','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'];
 
@@ -52,8 +52,8 @@
     // }
 
     // set initial height and width
-    var width = 900,
-        height = 1200;
+    var width = $(window).width() > 900 ? 900 : $(window).width(),
+        height = width * (4/3);
 
     // find map div and add an svg element
     var svg = d3.select('#map').append("svg")
@@ -80,16 +80,11 @@
                 .attr('class','tooltip')
                 .style('opacity', "0");
 
-
-    // get the geojson file
-    // you'll need to be running a python server at this point
-    // python -m SimpleHTTPServer 8888
-    d3.json("la-neighborhoods.json", function(json) {
-
+    var plotJSON = function(json) {
         // append the shape data to the g
         g.selectAll("path") // select any path elements in the HTML
             .data(json.features) // joins data to path
-            .enter() // 
+            .enter() //
             .append("path")
             .attr("d", path)
             .style("fill", function (d){ // function to get color
@@ -101,22 +96,44 @@
             .on("mouseover", function (d){
             d3.select(this).transition().duration(300).style("cursor","pointer").style("opacity",0.5);
                 tooltip.transition().duration(100).style("opacity", 0.9);
-                tooltip.html("<p>"+ d.properties.name +" has "+ d.properties.pantries +" pantries.</p>")
+                tooltip.html("<p>"+ d.properties.name +" has "+ d.properties.pantries +" pantries.</p>");
             }).on("mouseout", function (d){
                 d3.select(this).transition().duration(300).style("cursor","pointer").style("opacity",1);
                 tooltip.transition().duration(100)
                 .style("opacity", 0);
             });
+    };
 
-    }); // d3.json();
+    // get the geojson file
+    // you'll need to be running a python server at this point
+    // python -m SimpleHTTPServer 8888
+    if (!window.jsonLoaded) {
+        d3.json("la-neighborhoods.json", function(json) {
+            window.json = json;
+            window.jsonLoaded = true;
+            plotJSON(json);
+        });
+    } else {
+        plotJSON(window.json);
+    }
 
     // keep track of the tooltip
     $(window).mousemove( function(e) {
         mouseY = e.pageY;
         mouseX = (e.pageX < 125) ? 125 : (e.pageX > windowWidth-150) ? windowWidth-150 : e.pageX; // watch edge of page
         d3.select(".tooltip").style("top",(mouseY+20)+"px").style("left",(mouseX-125)+"px");
-    });  
+    });
+};
 
+
+$(window).resize(function() {
+  $("#map svg").remove();
+  $(".tooltip").remove();
+  init();
+});
+
+window.jsonLoaded = false;
+init();
 </script>
 
 </body>
